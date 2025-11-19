@@ -1,0 +1,25 @@
+:root {
+--color-bg: #0e0e12;
+--color-surface: #1a1a23;
+--color-primary: #7b2ff7;
+--color-primary-light: #bb86fc;
+--color-text: #ffffff;
+--color-text-secondary: #c7c7c7;
+--color-border: rgba(255,255,255,0.05);
+}
+
+
+body {
+background: var(--color-bg);
+color: var(--color-text);
+font-family: 'Inter', sans-serif;
+}
+
+
+.card {
+background: var(--color-surface);
+padding: 1.25rem;
+border-radius: 16px;
+box-shadow: 0 0 10px rgba(0,0,0,0.3);
+border: 1px solid var(--color-border);
+}
