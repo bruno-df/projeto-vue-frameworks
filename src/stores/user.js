@@ -7,7 +7,7 @@ export const useUserStore = defineStore('user', {
   }),
   actions: {
     login(email, password) {
-      // Simulação de Login
+      // Simulação de Login, qq email e senha funciona
       if (email && password) {
         this.user = { name: 'Utilizador Premium', email }
         this.isAuthenticated = true

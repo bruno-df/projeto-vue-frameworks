@@ -11,6 +11,8 @@
         <router-link to="/investimentos" active-class="active">Investimentos</router-link>
         <router-link to="/metas" active-class="active">Metas</router-link>
         <router-link to="/relatorios" active-class="active">Relatórios</router-link>
+        <router-link to="/conexoes" active-class="active">Conexões Bancárias</router-link>
+        <router-link to="/futuro" active-class="active">Contas a Pagar</router-link>
       </nav>
       <div class="logout-area">
         <button @click="handleLogout">Sair</button>
@@ -52,11 +54,10 @@ function handleLogout() {
 .layout-container {
   display: flex;
   min-height: 100vh;
-  background-color: #0f172a; /* Fundo global Dark */
+  background-color: #0f172a;
   color: #fff;
 }
 
-/* Sidebar */
 .sidebar {
   width: 250px;
   background: #161321;
@@ -94,7 +95,6 @@ nav a.active {
 }
 .logout-area button:hover { background: #ef4444; color: white; }
 
-/* Main Content */
 .main-content { flex: 1; display: flex; flex-direction: column; }
 .top-bar {
   height: 70px;
@@ -107,15 +107,14 @@ nav a.active {
 }
 .content-area { padding: 30px; overflow-y: auto; }
 
-/* CSS Atualizado para a Logo */
 .logo {
   margin-bottom: 40px;
-  text-align: center; /* Centraliza se a imagem for pequena */
+  text-align: center;
 }
 
 .logo-link {
-  display: inline-block; /* Garante que o link envolva a imagem corretamente */
-  cursor: pointer;       /* Força o cursor de "mãozinha" */
+  display: inline-block;
+  cursor: pointer;
   transition: transform 0.2s ease;
 }
 
@@ -125,8 +124,8 @@ nav a.active {
 }
 
 .logo img {
-  max-width: 100%; /* Garante que a imagem não estoure a sidebar */
+  max-width: 100%;
   height: auto;
-  display: block; /* Remove espaços fantasmas abaixo da imagem */
+  display: block;
 }
 </style>

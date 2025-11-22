@@ -11,6 +11,27 @@ export const useGoalsStore = defineStore('goals', {
   actions: {
     addGoal(goal) {
       this.goals.push({ ...goal, id: Date.now() })
+    },
+    deposit(id, amount) {
+      const goal = this.goals.find(g => g.id === id)
+      if (goal) goal.current += amount
+    },
+    withdraw(id, amount) {
+      const goal = this.goals.find(g => g.id === id)
+      if (goal) {
+        goal.current -= amount
+        if (goal.current < 0) goal.current = 0
+      }
+    },
+    editGoal(id, newTitle, newTarget) {
+      const goal = this.goals.find(g => g.id === id)
+      if (goal) {
+        goal.title = newTitle
+        goal.target = newTarget
+      }
+    },
+    removeGoal(id) {
+      this.goals = this.goals.filter(g => g.id !== id)
     }
   }
 })

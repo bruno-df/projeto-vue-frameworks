@@ -9,7 +9,7 @@
 defineProps({
   title: String,
   value: Number,
-  type: { type: String, default: 'neutral' } // income, expense, neutral
+  type: { type: String, default: 'neutral' }
 })
 </script>
 

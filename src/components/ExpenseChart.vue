@@ -10,25 +10,23 @@ import { Bar } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 import { useFinanceStore } from '../stores/financeStore'
 
-// Registar os componentes do Chart.js que vamos usar
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 const store = useFinanceStore()
 
-// Dados computados para reagir a mudanças no store
 const chartData = computed(() => {
   return {
     labels: ['Financeiro'],
     datasets: [
       {
         label: 'Entradas',
-        backgroundColor: '#4ade80', // Verde
+        backgroundColor: '#4ade80',
         data: [store.totalIncome],
         borderRadius: 5
       },
       {
         label: 'Saídas',
-        backgroundColor: '#f87171', // Vermelho
+        backgroundColor: '#f87171',
         data: [store.totalExpense],
         borderRadius: 5
       }
@@ -36,7 +34,6 @@ const chartData = computed(() => {
   }
 })
 
-// Configurações visuais (Tema Dark)
 const chartOptions = {
   responsive: true,
   maintainAspectRatio: false,
