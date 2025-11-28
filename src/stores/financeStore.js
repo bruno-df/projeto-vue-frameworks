@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 export const useFinanceStore = defineStore('finance', {
   state: () => ({
-    balance: 2500.00,
+    balance: 2350.00,
     // Histórico real
     transactions: [
       { id: 1, title: 'Projeto Freelance', amount: 2500, type: 'income', date: '2023-10-01', category: 'Trabalho' },
