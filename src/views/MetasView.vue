@@ -35,6 +35,7 @@
     <GoalUpdateModal
       v-if="showUpdateModal"
       :goalTitle="selectedGoal?.title"
+      :goalBalance="selectedGoal?.current"
       :mode="operationType"
       @close="closeUpdateModal"
       @save="handleUpdateBalance"

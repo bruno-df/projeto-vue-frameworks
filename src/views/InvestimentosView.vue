@@ -46,22 +46,31 @@ import { ref } from 'vue'
 import InvestmentCard from '../components/InvestmentCard.vue'
 import InvestmentModal from '../components/InvestmentModal.vue'
 import InvestmentUpdateModal from '../components/InvestmentUpdateModal.vue'
-
 import { useInvestmentsStore } from '../stores/investmentsStore'
 import { useFinanceStore } from '../stores/financeStore'
 
 const store = useInvestmentsStore()
 const financeStore = useFinanceStore()
-
 const showCreateModal = ref(false)
 const showUpdateModal = ref(false)
-
 const selectedAsset = ref(null)
 const operationType = ref('invest')
 
 function handleCreate(data) {
-  store.addInvestment(data)
-  showCreateModal.value = false
+    if(data.value > financeStore.balance) {
+        alert("Saldo insuficiente para realizar este investimento inicial");
+        return;
+    }
+    store.addInvestment(data)
+
+    financeStore.addTransaction({
+        title: `Investimento incial: ${data.name}`,
+        amount: data.value,
+        type: 'expense',
+        date: new Date().toISOString().split('T')[0],
+        category: 'Outros'
+    })
+    showCreateModal.value = false;
 }
 
 function openUpdateModal(payload) {

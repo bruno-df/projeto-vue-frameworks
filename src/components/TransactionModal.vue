@@ -15,7 +15,8 @@
 
         <div class="form-group">
           <label>Valor (R$)</label>
-          <input v-model.number="form.amount" type="number" step="0.01" placeholder="0.00" required />
+          <input v-model.number="form.amount" type="number" step="0.01" placeholder="0.00" class="{ 'input-error': isInsufficientFunds }" required />
+          <small v-if="isInsufficientFunds" style="color: red; display: block;">Saldo insuficiente (Você tem: RS{{ financeStore.balance }})</small>
         </div>
 
         <div class="form-group">
@@ -50,7 +51,8 @@
           </div>
         </div>
 
-        <button type="submit" class="btn-primary">Adicionar</button>
+        <button type="submit" class="btn-primary" :disabled="isInsufficientFunds" 
+        :style="{ opacity: isInsufficientFunds ? '0.5' : '1', cursor: isInsufficientFunds ? 'not-allowed' : 'pointer'}">Adicionar</button>
       </form>
     </div>
   </div>
@@ -58,8 +60,18 @@
 
 <script setup>
 import { reactive } from 'vue'
+import { useFinanceStore } from '@/stores/financeStore'
+import { computed } from 'vue'
 
 const emit = defineEmits(['close', 'save'])
+const financeStore = useFinanceStore()
+
+const isInsufficientFunds = computed(() => {
+    if(form.type === 'income') return false
+    if(!form.type === 'income') return false
+
+    return form.amount > financeStore.balance
+})
 
 const form = reactive({
   title: '',
@@ -71,6 +83,7 @@ const form = reactive({
 
 function submitForm() {
   if (!form.title || !form.amount) return
+  if (isInsufficientFunds.value) return
   emit('save', { ...form })
 }
 </script>
@@ -124,6 +137,8 @@ select {
   background-size: 1.5em 1.5em;
   padding-right: 2.5rem;
 }
+
+.input-error { border-color: red; }
 
 select:focus {
   outline: none;

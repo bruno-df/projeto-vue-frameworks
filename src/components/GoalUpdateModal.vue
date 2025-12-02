@@ -49,6 +49,7 @@ import { useFinanceStore } from '../stores/financeStore'
 
 const props = defineProps({
   goalTitle: String,
+  goalBalance: Number,
   mode: { type: String, default: 'deposit' }
 })
 const emit = defineEmits(['close', 'save'])
@@ -56,10 +57,17 @@ const emit = defineEmits(['close', 'save'])
 const financeStore = useFinanceStore()
 const amount = ref(null)
 
+const limitValue = computed(() => {
+    if (props.mode === 'deposit') {
+        return financeStore.balance
+    } else {
+        return props.goalBalance
+    }
+})
+
 const isInsufficientFunds = computed(() => {
-  if (props.mode !== 'deposit') return false
   if (!amount.value) return false
-  return amount.value > financeStore.balance
+  return amount.value > limitValue.value
 })
 
 function submitForm() {
